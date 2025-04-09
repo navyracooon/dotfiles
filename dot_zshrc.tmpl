@@ -1,0 +1,82 @@
+# general
+
+## history
+HISTFILE=~/.zsh_history
+HISTSIZE=100000 
+SAVEHIST=100000
+setopt hist_verify
+setopt share_history
+setopt inc_append_history
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+
+## beep
+{{ if eq .chezmoi.os "darwin" }}
+setopt no_beep
+setopt nolistbeep
+{{ end }}
+
+# alias
+
+{{ if eq .chezmoi.os "darwin" }}
+alias ls='ls -G'
+alias la='ls -aG'
+alias ll='ls -lG'
+alias lla='ls -laG'
+{{ else if eq .chezmoi.os "linux" }}
+alias ls='ls --color=auto'
+alias la='ls -a --color=auto'
+alias ll='ls -l --color=auto'
+alias lla='ls -la --color=auto'
+{{ end }}
+
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias cm='chezmoi'
+
+alias vi='nvim'
+alias vim='nvim'
+alias vimrc='chezmoi edit ~/.config/nvim'
+
+alias zshrc='chezmoi edit ~/.zshrc'
+
+alias history='history 0'
+
+alias py='python3'
+alias python='python3'
+alias pip='pip3'
+alias piprm='pip3 freeze > uninstall.txt && pip3 uninstall -y -r uninstall.txt && rm uninstall.txt'
+
+alias po='poetry init -n'
+alias poi='poetry install'
+alias poa='poetry add'
+alias pos='poetry shell'
+
+alias t='tmux'
+alias tls='tmux ls'
+alias ta='tmux a'
+alias tks='tmux kill-server'
+alias tsyn='tmux set synchronize on'
+alias ten='tmux set synchronize off ; clear'
+alias tmuxconf='chezmoi edit ~/.tmux.conf'
+
+alias ide='source ~/.local/bin/resize-pane3.sh'
+alias ide2='source ~/.local/bin/resize-pane4.sh'
+
+# env
+
+export EDITOR="nvim"
+
+## homebrew
+{{ if eq .chezmoi.os "darwin" }}
+export HOMEBREW_NO_AUTO_UPDATE=1
+{{ end }}
+
+## sheldon
+eval "$(sheldon source)"
+
+# startup
+[[ $- != *i* ]] && return
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -z "$TMUX" ]] && tmux

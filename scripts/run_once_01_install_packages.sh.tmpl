@@ -1,0 +1,14 @@
+#!/bin/bash
+
+packages=("git" "zsh" "sheldon" "tmux" "neovim" "ripgrep")
+
+{{ if eq .chezmoi.os "darwin" }}
+brew install "${packages[@]}"
+{{ else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "arch") }}
+if [ "$(id -u)" -eq 0 ]; then
+    pacman_cmd=(pacman -S)
+else
+    pacman_cmd=(sudo pacman -S)
+fi
+"${pacman_cmd[@]}" "${packages[@]}"
+{{ end }}
