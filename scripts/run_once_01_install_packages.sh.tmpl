@@ -1,6 +1,6 @@
 #!/bin/bash
 
-packages=("git" "zsh" "sheldon" "tmux" "neovim" "ripgrep")
+packages=("git" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf")
 
 {{ if eq .chezmoi.os "darwin" }}
 brew install "${packages[@]}"

@@ -76,6 +76,9 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 ## sheldon
 eval "$(sheldon source)"
 
+## fzf
+eval "$(fzf --zsh)"
+
 # startup
 [[ $- != *i* ]] && return
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
