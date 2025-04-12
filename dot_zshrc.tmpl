@@ -37,7 +37,7 @@ alias cm='chezmoi'
 
 alias vi='nvim'
 alias vim='nvim'
-alias vimrc='chezmoi edit ~/.config/nvim'
+alias vimrc='(cd ~/.local/share/chezmoi/dot_config/nvim/ && nvim init.lua)'
 
 alias zshrc='chezmoi edit ~/.zshrc'
 
@@ -59,7 +59,7 @@ alias ta='tmux a'
 alias tks='tmux kill-server'
 alias tsyn='tmux set synchronize on'
 alias ten='tmux set synchronize off ; clear'
-alias tmuxconf='chezmoi edit ~/.tmux.conf'
+alias tmuxrc='chezmoi edit ~/.tmux.conf'
 
 alias ide='source ~/.local/bin/resize-pane3.sh'
 alias ide2='source ~/.local/bin/resize-pane4.sh'
