@@ -1,0 +1,9 @@
+#!/bin/bash
+
+{{ if eq .chezmoi.os "darwin" }}
+required_packages=("koekeishiya/formulae/yabai" "koekeishiya/formulae/skhd")
+
+brew install "${required_packages[@]}"
+yabai --start-service
+skhd --start-service
+{{ end }}
