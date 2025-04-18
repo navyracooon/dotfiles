@@ -51,6 +51,8 @@ alias poi='poetry install'
 alias poa='poetry add'
 alias pos='poetry shell'
 
+alias g='git'
+
 alias t='tmux'
 alias tls='tmux ls'
 alias ta='tmux a'
@@ -76,6 +78,9 @@ eval "$(sheldon source)"
 
 ## fzf
 eval "$(fzf --zsh)"
+
+### compinit
+autoload -Uz compinit && compinit
 
 # startup
 [[ $- != *i* ]] && return
