@@ -1,6 +1,6 @@
 return require("lazy").setup({
     -- Colorscheme
-    require("plugins.base16"),
+    require("plugins.colorscheme"),
     -- Filer
     require("plugins.vaffle"),
     -- Telescope
