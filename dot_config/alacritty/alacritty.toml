@@ -4,11 +4,11 @@ live_config_reload = true
 padding = { x = 3, y = 3 }
 
 [font]
-normal.family = "Cica"
+normal.family = "HackGen Console NF"
 normal.style = "Regular"
-bold.family = "Cica"
-italic.family = "Cica"
-bold_italic.family = "Cica"
+bold.family = "HackGen Console NF"
+italic.family = "HackGen Console NF"
+bold_italic.family = "HackGen Console NF"
 size = 16.0
 
 [colors.primary]
