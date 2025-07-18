@@ -25,25 +25,20 @@ opt.termguicolors = true -- Show correct color
 opt.pumheight = 10       -- Set the height of completion window
 
 -- Clipboard
-local function default_paste() -- For security issue, I don't use OSC 52 for pasting
-    return {
-        vim.fn.split(vim.fn.getreg(""), "\n"),
-        vim.fn.getregtype(""),
+if vim.fn.executable('win32yank.exe') == 1 then
+    vim.g.clipboard = {
+        name = 'win32yank',
+        copy = {
+            ['+'] = 'win32yank.exe -i --crlf',
+            ['*'] = 'win32yank.exe -i --crlf'
+        },
+        paste = {
+            ['+'] = 'win32yank.exe -o --lf',
+            ['*'] = 'win32yank.exe -o --lf'
+        },
+        cache_enabled = 0
     }
 end
-
-vim.g.clipboard = {
-    name = "OSC 52", -- Use OSC 52 to use system clipboard
-    copy = {
-        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    },
-    paste = {
-        ["+"] = default_paste,
-        ["*"] = default_paste,
-    },
-    cache_enabled = false,
-}
 
 opt.clipboard:append("unnamedplus")
 
