@@ -62,8 +62,16 @@ alias tsyn='tmux set synchronize on'
 alias ten='tmux set synchronize off ; clear'
 alias tmuxrc='chezmoi edit ~/.tmux.conf'
 
-alias ide='source ~/.local/bin/resize-pane3.sh'
-alias ide2='source ~/.local/bin/resize-pane4.sh'
+function tp () {
+    local pane
+    if [ -n "$1" ]; then
+        pane=$1
+    else
+        pane=3
+    fi
+
+    source ~/.local/bin/resize-pane${pane}.sh
+}
 
 # env
 
