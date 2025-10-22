@@ -6,9 +6,6 @@ local keymap = vim.keymap
 
 keymap.set("n", "j", "gj")
 keymap.set("n", "k", "gk")
---
--- keymap.set({"n", "x"}, "p", '"+p', {noremap = true})
--- keymap.set({"n", "x"}, "P", '"+P', {noremap = true})
 
 keymap.set("n", "<leader>a", "ggVG")
 keymap.set("n", "<leader>n", ":nohl<CR>")
