@@ -1,0 +1,57 @@
+" ==============================
+" Keybindings
+" ==============================
+
+let mapleader = " "
+
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <leader>a ggVG
+nnoremap <leader>n :nohl<CR>
+nnoremap <leader>v gv
+vnoremap <leader>s :sort<CR>
+
+
+" ==============================
+" Options
+" ==============================
+set number
+set relativenumber
+
+set autoindent
+set expandtab
+set shiftwidth=4
+set tabstop=4
+
+set breakindent
+set showbreak=>
+
+set ignorecase
+set smartcase
+
+set conceallevel=0
+set termguicolors
+set pumheight=10
+
+if executable('win32yank.exe')
+    let g:clipboard = {
+    \   'name': 'win32yank',
+    \   'copy': {
+    \       '+': 'win32yank.exe -i --crlf',
+    \       '*': 'win32yank.exe -i --crlf',
+    \   },
+    \   'paste': {
+    \       '+': 'win32yank.exe -o --lf',
+    \       '*': 'win32yank.exe -o --lf',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+endif
+set clipboard+=unnamedplus
+
+set noswapfile
+
+set undofile
+
+set iskeyword+=-
