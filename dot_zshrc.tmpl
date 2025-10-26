@@ -91,6 +91,9 @@ eval "$(fzf --zsh)"
 ### compinit
 autoload -Uz compinit && compinit
 
+### direnv
+eval "$(direnv hook zsh)"
+
 # startup
 [[ $- != *i* ]] && return
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
