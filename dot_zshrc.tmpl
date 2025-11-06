@@ -63,14 +63,14 @@ alias ten='tmux set synchronize off ; clear'
 alias tmuxrc='chezmoi edit ~/.tmux.conf'
 
 function tp () {
-    local pane
-    if [ -n "$1" ]; then
-        pane=$1
-    else
-        pane=3
-    fi
-
+    local pane=${1:-3}
     sh ~/.local/bin/resize-pane${pane}.sh
+}
+
+function tsw() {
+    local source_window=${1:-.}
+    local target_window=${2:-!}
+    tmux swap-window -s "$source_window" -t "$target_window"
 }
 
 # env
