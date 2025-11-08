@@ -2,7 +2,7 @@ return require("lazy").setup({
     -- Colorscheme
     require("plugins.colorscheme"),
     -- Filer
-    require("plugins.vaffle"),
+    require("plugins.oil"),
     -- Telescope
     require("plugins.telescope"),
     -- Comment
