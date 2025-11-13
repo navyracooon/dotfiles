@@ -4,9 +4,9 @@ tmux split-window -v -c "#{pane_current_path}"
 tmux select-pane -R
 tmux split-window -v -c "#{pane_current_path}"
 tmux select-pane -U
-tmux resize-pane -D 9
+tmux resize-pane -D 17
 tmux select-pane -R 
-tmux resize-pane -D 9
+tmux resize-pane -D 17
 tmux select-pane -L
 tmux select-pane -U
 sleep 0.3
