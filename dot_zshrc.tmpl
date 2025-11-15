@@ -16,11 +16,11 @@ setopt pushd_silent
 
 ## chpwd
 chpwd() {
-    {{ if eq .chezmoi.os "darwin" }}
-        ls -G
-    {{ else if eq .chezmoi.os "linux" }}
-        ls --color=auto
-    {{ end }}
+    {{- if eq .chezmoi.os "darwin" }}
+    ls -G
+    {{- else if eq .chezmoi.os "linux" }}
+    ls --color=auto
+    {{- end }}
 }
 
 ## history
@@ -38,17 +38,17 @@ bindkey -v
 
 # alias
 
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 alias ls='ls -G'
 alias la='ls -aG'
 alias ll='ls -lG'
 alias lla='ls -laG'
-{{ else if eq .chezmoi.os "linux" }}
+{{- else if eq .chezmoi.os "linux" }}
 alias ls='ls --color=auto'
 alias la='ls -a --color=auto'
 alias ll='ls -l --color=auto'
 alias lla='ls -la --color=auto'
-{{ end }}
+{{- end }}
 
 alias cm='chezmoi -v'
 
@@ -92,12 +92,12 @@ function tsw() {
 
 # env
 
-export EDITOR="nvim"
+export EDITOR='nvim'
 
 ## homebrew
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 export HOMEBREW_NO_AUTO_UPDATE=1
-{{ end }}
+{{- end }}
 
 ## sheldon
 eval "$(sheldon source)"
@@ -113,5 +113,5 @@ eval "$(direnv hook zsh)"
 
 # startup
 [[ $- != *i* ]] && return
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [[ -z "$TMUX" ]] && tmux
