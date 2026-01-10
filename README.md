@@ -8,9 +8,8 @@
 [![Terminal](https://img.shields.io/badge/terminal-Alacritty-f46d01?logo=alacritty&logoColor=white)](dot_config/alacritty)
 
 ## Install
-1. `chezmoi init navyracooon` もしくは `chezmoi init navyracooon --ssh`
-2. `sh ~/.local/share/chezmoi/scripts/create_chezmoi_toml.sh`
-3. `chezmoi apply`
+HTTPS: `chezmoi init navyracooon --apply`  
+SSH: `chezmoi init navyracooon --ssh --apply`
 
 ## What's Inside
 #### [Zsh](https://www.zsh.org/)
