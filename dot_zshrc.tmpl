@@ -14,14 +14,7 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushd_silent
 
-## chpwd
-chpwd() {
-    {{- if eq .chezmoi.os "darwin" }}
-    ls -G
-    {{- else if eq .chezmoi.os "linux" }}
-    ls --color=auto
-    {{- end }}
-}
+typeset -g KEYTIMEOUT=1
 
 ## history
 HISTFILE=~/.zsh_history
@@ -81,12 +74,12 @@ alias tsyn='tmux set synchronize on'
 alias ten='tmux set synchronize off ; clear'
 alias tmuxrc='chezmoi edit ~/.tmux.conf && chezmoi apply && tmux source-file ~/.tmux.conf'
 
-function tp () {
+tp () {
     local pane=${1:-3}
     sh ~/.local/bin/rearrange-pane${pane}.sh
 }
 
-function tsw() {
+tsw() {
     local source_window=${1:-.}
     local target_window=${2:-!}
     tmux swap-window -s "$source_window" -t "$target_window"
