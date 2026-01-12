@@ -3,8 +3,10 @@
 packages=("git" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf" "direnv")
 
 {{- if eq .chezmoi.os "darwin" }}
+packages+=("raycast" "amethyst")
 brew install "${packages[@]}"
 {{- else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "arch") }}
+packages+=("pipewire-pulse")
 if [ "$(id -u)" -eq 0 ]; then
     pacman_cmd=(pacman -S)
 else
