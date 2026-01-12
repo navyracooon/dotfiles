@@ -29,7 +29,7 @@ setopt hist_reduce_blanks
 ## bindkey
 bindkey -v
 
-# alias
+# aliases
 
 {{- if eq .chezmoi.os "darwin" }}
 alias ls='ls -G'
@@ -76,7 +76,7 @@ alias tmuxrc='chezmoi edit ~/.tmux.conf && chezmoi apply && tmux source-file ~/.
 
 tp () {
     local pane=${1:-3}
-    sh ~/.scripts/tmux/rearrange-pane${pane}.sh
+    sh ~/.chezmoi/scripts/tmux/rearrange-pane${pane}.sh
 }
 
 tsw() {
@@ -85,7 +85,47 @@ tsw() {
     tmux swap-window -s "$source_window" -t "$target_window"
 }
 
-# env
+# hooks
+
+## notify when long command finished
+autoload -Uz add-zsh-hook
+typeset -g ZSH_LONG_CMD_THRESHOLD=10
+typeset -g ZSH_LONG_CMD_SOUND="$HOME/.chezmoi/assets/sounds/notification.{{ if eq .chezmoi.os "darwin" }}aiff{{ else }}wav{{ end }}"
+typeset -g ZSH_LONG_CMD_IGNORE_RE='^(less|more|man|vi|vim|nvim|view|most|bat|batcat|tig|fzf|(git|g) (log|diff|show|status))( |$)'
+typeset -g __zsh_long_cmd_start_time=0
+typeset -g __zsh_long_cmd_skip=0
+
+_zsh_long_cmd_notify() {
+    local sound="$1"
+    [[ -f "$sound" ]] || return 0
+    if command -v afplay >/dev/null 2>&1; then
+        afplay "$sound" >/dev/null 2>&1 &
+    elif command -v paplay >/dev/null 2>&1; then
+        paplay "$sound" >/dev/null 2>&1 &
+    fi
+}
+
+_zsh_long_cmd_preexec() {
+    __zsh_long_cmd_start_time=$EPOCHSECONDS
+    __zsh_long_cmd_skip=0
+    [[ "$1" =~ $ZSH_LONG_CMD_IGNORE_RE ]] && __zsh_long_cmd_skip=1
+}
+
+_zsh_long_cmd_precmd() {
+    if [[ "$__zsh_long_cmd_start_time" -gt 0 ]]; then
+        local duration=$((EPOCHSECONDS - __zsh_long_cmd_start_time))
+        if [[ "$__zsh_long_cmd_skip" -eq 0 && "$duration" -ge "$ZSH_LONG_CMD_THRESHOLD" ]]; then
+            _zsh_long_cmd_notify "$ZSH_LONG_CMD_SOUND"
+        fi
+    fi
+    __zsh_long_cmd_start_time=0
+    __zsh_long_cmd_skip=0
+}
+
+add-zsh-hook preexec _zsh_long_cmd_preexec
+add-zsh-hook precmd _zsh_long_cmd_precmd
+
+# envs
 
 export EDITOR='nvim'
 
@@ -106,7 +146,7 @@ autoload -Uz compinit && compinit
 ### direnv
 eval "$(direnv hook zsh)"
 
-# startup
+# startups
 [[ $- != *i* ]] && return
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [[ -z "$TMUX" ]] && tmux
