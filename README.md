@@ -11,19 +11,17 @@
 HTTPS: `chezmoi init navyracooon --apply`  
 SSH: `chezmoi init navyracooon --ssh --apply`
 
+## Abstract
+全体的に、シンプルで使いやすい設定を心掛けています。  
+必要最小限の設定を好む人におすすめです。
+
 ## What's Inside
-#### [Zsh](https://www.zsh.org/)
-macOS 標準のシェルで、補完や powerline が用意された状態になります。
+- [Zsh](https://www.zsh.org/)
 
-#### [tmux](https://github.com/tmux/tmux)
-セッション常駐型のターミナル multiplexer。起動時に自動アタッチし、レイアウト操作スクリプトで素早く分割を作成できます。
+- [tmux](https://github.com/tmux/tmux)
 
-#### [Neovim](https://github.com/neovim/neovim) / [Vim](https://www.vim.org/)
-Lua を主体に構成した Neovim 設定。LSP、補完、検索を最小限のプラグインでまとめています。
-Neovim が使えない環境でも `dot_vimrc` を入れておけば最低限の設定で使いやすい Vim を使用できます。
+- [Neovim](https://github.com/neovim/neovim) / [Vim](https://www.vim.org/)
 
-#### [Alacritty](https://github.com/alacritty/alacritty)
-GPU 描画の Rust 製ターミナルエミュレータ。
+- [Amethyst](https://github.com/ianyh/Amethyst)  (※ インストールはオプション)
 
-#### [Amethyst](https://github.com/ianyh/Amethyst)
-macOS 用タイル型ウィンドウマネージャ。
+- [Alacritty](https://github.com/alacritty/alacritty)  (※ インストールが別途必要)
