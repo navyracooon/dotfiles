@@ -3,7 +3,9 @@
 packages=("git" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf" "direnv")
 
 {{- if eq .chezmoi.os "darwin" }}
-packages+=("raycast" "amethyst")
+{{- if .install_amethyst }}
+packages+=("amethyst")
+{{- end }}
 brew install "${packages[@]}"
 {{- else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "arch") }}
 packages+=("pipewire-pulse")
