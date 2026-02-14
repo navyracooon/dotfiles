@@ -7,3 +7,4 @@
 git_name = {{ promptStringOnce . "git_name" "Git username" | quote }}
 git_email = {{ promptStringOnce . "git_email" "Git email address" | quote }}
 install_amethyst = {{ $install_amethyst }}
+enable_notification = {{ promptBoolOnce . "enable_notification" "Enable notification sound when a command takes a long time [y/n]" true }}
