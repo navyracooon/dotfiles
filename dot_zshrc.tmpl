@@ -87,6 +87,7 @@ tsw() {
 
 # hooks
 
+{{- if .enable_notification }}
 ## notify when long command finished
 autoload -Uz add-zsh-hook
 typeset -g ZSH_LONG_CMD_THRESHOLD=10
@@ -124,6 +125,7 @@ _zsh_long_cmd_precmd() {
 
 add-zsh-hook preexec _zsh_long_cmd_preexec
 add-zsh-hook precmd _zsh_long_cmd_precmd
+{{- end }}
 
 # envs
 
