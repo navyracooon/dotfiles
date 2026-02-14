@@ -19,4 +19,4 @@ keymap.set("n", "K", vim.lsp.buf.hover)
 
 keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-keymap.set("n", "<leader>f", function() vim.lsp.buf.format { async = true } end)
+keymap.set({"n", "x"}, "<leader>f", function() vim.lsp.buf.format { async = true } end)
