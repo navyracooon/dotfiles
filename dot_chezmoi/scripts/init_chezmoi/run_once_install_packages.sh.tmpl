@@ -44,5 +44,5 @@ install_with_sudo_if_needed pacman -S --needed "${packages[@]}"
 {{- else }}
 printf 'unsupported platform: os=%s osRelease.id=%s\n' "{{ .chezmoi.os }}" "{{ if .chezmoi.osRelease }}{{ .chezmoi.osRelease.id }}{{ end }}" >&2
 print_manual_install_packages
-exit 1
+exit 0
 {{- end }}
