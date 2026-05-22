@@ -1,18 +1,48 @@
 #!/bin/bash
 
-packages=("git" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf" "direnv" "git-delta")
+set -e
+
+common_packages=("git" "make" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf" "direnv" "git-delta")
+gui_packages=("ghostty")
+macos_gui_packages=("amethyst")
+arch_gui_packages=()
+
+install_with_sudo_if_needed() {
+    if [ "$(id -u)" -eq 0 ]; then
+        "$@"
+    else
+        sudo "$@"
+    fi
+}
+
+print_manual_install_packages() {
+    printf 'install the following packages manually before applying these dotfiles:\n' >&2
+    printf '  %s\n' "${common_packages[@]}" >&2
+
+    {{- if eq .profile "gui" }}
+    printf 'optional GUI packages:\n' >&2
+    printf '  %s\n' "${gui_packages[@]}" >&2
+    {{- end }}
+}
 
 {{- if eq .chezmoi.os "darwin" }}
-{{- if .install_amethyst }}
-packages+=("amethyst")
+brew install "${common_packages[@]}"
+
+{{- if eq .profile "gui" }}
+brew install --cask "${gui_packages[@]}" "${macos_gui_packages[@]}"
 {{- end }}
-brew install "${packages[@]}"
+
 {{- else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "arch") }}
-packages+=("pipewire-pulse")
-if [ "$(id -u)" -eq 0 ]; then
-    pacman_cmd=(pacman -S)
-else
-    pacman_cmd=(sudo pacman -S)
-fi
-"${pacman_cmd[@]}" "${packages[@]}"
+packages=("${common_packages[@]}")
+
+{{- if eq .profile "gui" }}
+packages+=("${gui_packages[@]}" "${arch_gui_packages[@]}")
+{{- end }}
+
+install_with_sudo_if_needed pacman -S --needed "${packages[@]}"
+
+{{- else }}
+printf 'unsupported platform: os=%s osRelease.id=%s\n' "{{ .chezmoi.os }}" "{{ if .chezmoi.osRelease }}{{ .chezmoi.osRelease.id }}{{ end }}" >&2
+print_manual_install_packages
+exit 1
 {{- end }}
