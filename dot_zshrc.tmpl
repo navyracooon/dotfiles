@@ -109,4 +109,4 @@ eval "$(direnv hook zsh)"
 # startups
 [[ $- != *i* ]] && return
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-[[ -z "$TMUX" ]] && tmux
+[[ -z "$TMUX" && -z "$SSH_CONNECTION" ]] && tmux
