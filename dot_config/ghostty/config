@@ -3,3 +3,7 @@ font-style = "Regular"
 font-size = 18
 
 theme = Light Owl
+
+shell-integration-features = no-title
+title = " "
+macos-titlebar-proxy-icon = hidden
