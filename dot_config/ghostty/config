@@ -1,8 +1,7 @@
-font-family = "HackGen Console NF"
-font-style = "Regular"
-font-size = 18
-
 theme = Light Owl
+
+font-family = "HackGen Console NF"
+font-size = 18
 
 shell-integration-features = no-title
 title = " "
