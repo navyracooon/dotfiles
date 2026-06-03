@@ -15,8 +15,8 @@ keymap.set("v", "<leader>s", ":sort<CR>")
 -- LSP
 keymap.set("n", "gd", vim.lsp.buf.definition)
 keymap.set("n", "gD", vim.lsp.buf.declaration)
-keymap.set("n", "K", vim.lsp.buf.hover)
+keymap.set({"n", "x"}, "g=", function() vim.lsp.buf.format { async = true } end)
+keymap.set("n", "gK", vim.lsp.buf.hover)
 
-keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-keymap.set({"n", "x"}, "<leader>f", function() vim.lsp.buf.format { async = true } end)
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
