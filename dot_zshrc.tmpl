@@ -34,13 +34,13 @@ bindkey -v
 {{- if eq .chezmoi.os "darwin" }}
 alias ls='ls -G'
 alias la='ls -aG'
-alias ll='ls -lG'
-alias lla='ls -laG'
+alias ll='ls -lhG'
+alias lla='ls -lhaG'
 {{- else if eq .chezmoi.os "linux" }}
 alias ls='ls --color=auto'
 alias la='ls -a --color=auto'
-alias ll='ls -l --color=auto'
-alias lla='ls -la --color=auto'
+alias ll='ls -lh --color=auto'
+alias lla='ls -lha --color=auto'
 {{- end }}
 
 alias cm='chezmoi -v'
