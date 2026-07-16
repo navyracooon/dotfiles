@@ -1,0 +1,22 @@
+[keys]
+prefix = "ctrl+w"
+open_notification_target = ""
+new_workspace = "prefix+o"
+new_tab = "prefix+i"
+close_tab = ""
+split_vertical = "prefix+|"
+split_horizontal = "prefix+_"
+close_pane = "prefix+x"
+close_workspace = "prefix+shift+x"
+zoom = "prefix+plus"
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+
+[theme]
+name = "tokyo-night-day"
+auto_switch = false
+
+[ui]
+confirm_close = false
+pane_borders = true
+pane_gaps = false

@@ -2,7 +2,7 @@
 
 set -e
 
-common_packages=("git" "make" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf" "direnv" "git-delta")
+common_packages=("git" "make" "zsh" "sheldon" "neovim" "ripgrep" "fzf" "direnv" "git-delta")
 gui_packages=("ghostty")
 macos_gui_packages=("amethyst")
 arch_gui_packages=()
@@ -18,6 +18,7 @@ install_with_sudo_if_needed() {
 print_manual_install_packages() {
     printf 'install the following packages manually before applying these dotfiles:\n' >&2
     printf '  %s\n' "${common_packages[@]}" >&2
+    printf '  herdr\n' >&2
 
     {{- if eq .profile "gui" }}
     printf 'optional GUI packages:\n' >&2
@@ -27,6 +28,7 @@ print_manual_install_packages() {
 
 {{- if eq .chezmoi.os "darwin" }}
 brew install "${common_packages[@]}"
+brew install herdr
 
 {{- if eq .profile "gui" }}
 brew install --cask "${gui_packages[@]}" "${macos_gui_packages[@]}"
@@ -40,6 +42,7 @@ packages+=("${gui_packages[@]}" "${arch_gui_packages[@]}")
 {{- end }}
 
 install_with_sudo_if_needed pacman -S --needed "${packages[@]}"
+yay -S --needed herdr-bin
 
 {{- else }}
 printf 'unsupported platform: os=%s osRelease.id=%s\n' "{{ .chezmoi.os }}" "{{ if .chezmoi.osRelease }}{{ .chezmoi.osRelease.id }}{{ end }}" >&2
