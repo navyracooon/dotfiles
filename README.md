@@ -8,6 +8,8 @@
 [![Editor](https://img.shields.io/badge/editor-Neovim%20%7C%20Vim-57A143?logo=neovim&logoColor=white)](dot_config/nvim)
 [![Terminal](https://img.shields.io/badge/terminal-Ghostty-333333?logo=gnometerminal&logoColor=white)](dot_config/ghostty)
 
+![dotfiles screenshot](docs/images/screenshot.png)
+
 ## Install
 HTTPS: `chezmoi init navyracooon --apply`  
 SSH: `chezmoi init navyracooon --ssh --apply`
