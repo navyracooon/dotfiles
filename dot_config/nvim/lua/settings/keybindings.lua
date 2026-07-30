@@ -13,10 +13,15 @@ keymap.set("n", "<leader>v", "gv")
 keymap.set("v", "<leader>s", ":sort<CR>")
 
 -- LSP
-keymap.set("n", "gd", vim.lsp.buf.definition)
-keymap.set("n", "gD", vim.lsp.buf.declaration)
-keymap.set({"n", "x"}, "g=", function() vim.lsp.buf.format { async = true } end)
-keymap.set("n", "gK", vim.lsp.buf.hover)
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp-keymaps", { clear = true }),
+    callback = function(event)
+        local opts = { buffer = event.buf }
 
-keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+        keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        keymap.set({"n", "x"}, "g=", function()
+            vim.lsp.buf.format { async = true }
+        end, opts)
+    end,
+})
