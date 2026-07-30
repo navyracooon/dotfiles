@@ -24,6 +24,9 @@ macOS と Arch Linux を主な対象にしています．
 - `cli`: SSH 先やリモート環境向けの最小構成
 - `gui`: ローカルのデスクトップ環境向けに，Ghostty などの GUI アプリケーションも追加
 
+## Zsh Plugins
+Zsh プラグインは [Sheldon](https://sheldon.cli.rs/) で管理しています．プラグインを更新するときは `sheldon lock --update` を実行します．
+
 ## What's Inside
 - [Zsh](https://www.zsh.org/)
 - [tmux](https://github.com/tmux/tmux)
