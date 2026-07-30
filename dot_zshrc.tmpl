@@ -1,3 +1,5 @@
+[[ -o interactive ]] || return
+
 # general
 
 ## setopts
@@ -96,19 +98,18 @@ export EDITOR='nvim'
 export HOMEBREW_NO_AUTO_UPDATE=1
 {{- end }}
 
-## sheldon
-eval "$(sheldon source)"
-
 ## fzf
-eval "$(fzf --zsh)"
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"
 
 ### compinit
 autoload -Uz compinit && compinit
 
 ### direnv
-eval "$(direnv hook zsh)"
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+
+## sheldon
+eval "$(sheldon source)"
 
 # startups
-[[ $- != *i* ]] && return
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [[ -z "$TMUX" && -z "$SSH_CONNECTION" ]] && tmux
