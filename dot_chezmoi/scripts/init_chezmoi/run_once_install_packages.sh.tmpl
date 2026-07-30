@@ -5,6 +5,7 @@ set -e
 common_packages=("git" "make" "zsh" "sheldon" "tmux" "neovim" "ripgrep" "fzf" "direnv" "git-delta")
 gui_packages=("ghostty")
 macos_gui_packages=("amethyst")
+arch_packages=("base-devel")
 arch_gui_packages=()
 
 install_with_sudo_if_needed() {
@@ -33,7 +34,7 @@ brew install --cask "${gui_packages[@]}" "${macos_gui_packages[@]}"
 {{- end }}
 
 {{- else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "arch") }}
-packages=("${common_packages[@]}")
+packages=("${common_packages[@]}" "${arch_packages[@]}")
 
 {{- if eq .profile "gui" }}
 packages+=("${gui_packages[@]}" "${arch_gui_packages[@]}")
@@ -46,3 +47,8 @@ printf 'unsupported platform: os=%s osRelease.id=%s\n' "{{ .chezmoi.os }}" "{{ i
 print_manual_install_packages
 exit 0
 {{- end }}
+
+if ! command -v cc >/dev/null 2>&1; then
+    printf 'a C compiler is required but was not found in PATH\n' >&2
+    exit 1
+fi
