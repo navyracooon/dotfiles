@@ -5,5 +5,9 @@ return {
         { "mason-org/mason.nvim", opts = {} }, -- Language Server Manager
         "neovim/nvim-lspconfig",               -- LSP Config
     },
-    opts = {},
+    opts = {
+        ensure_installed = {
+            "lua_ls",
+        },
+    },
 }
