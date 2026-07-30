@@ -1,1 +1,10 @@
 README.md
+docs/
+
+{{- if ne .profile "gui" }}
+.config/ghostty/
+{{- end }}
+
+{{- if or (ne .profile "gui") (ne .chezmoi.os "darwin") }}
+.config/amethyst/
+{{- end }}
