@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -euo pipefail
+
+common_packages=(
+    direnv
+    fzf
+    git
+    git-delta
+    neovim
+    ripgrep
+    sheldon
+    tmux
+    zsh
+)
+gui_packages=(ghostty)
+macos_gui_packages=(amethyst)
+arch_packages=(base-devel)
+
+{{- if eq .chezmoi.os "darwin" }}
+if ! command -v brew >/dev/null 2>&1; then
+    printf 'Homebrew is required\n' >&2
+    exit 1
+fi
+
+brew install "${common_packages[@]}"
+
+{{- if eq .profile "gui" }}
+brew install --cask "${gui_packages[@]}" "${macos_gui_packages[@]}"
+{{- end }}
+
+{{- else if and .chezmoi.osRelease (eq .chezmoi.osRelease.id "arch") }}
+packages=("${common_packages[@]}" "${arch_packages[@]}")
+
+{{- if eq .profile "gui" }}
+packages+=("${gui_packages[@]}")
+{{- end }}
+
+pacman_command=(pacman)
+if (( EUID != 0 )); then
+    if ! command -v sudo >/dev/null 2>&1; then
+        printf 'sudo is required when running as a non-root user\n' >&2
+        exit 1
+    fi
+    pacman_command=(sudo pacman)
+fi
+
+"${pacman_command[@]}" -S --needed "${packages[@]}"
+
+{{- else }}
+printf 'This OS is not supported.\n' >&2
+exit 1
+{{- end }}
