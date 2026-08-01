@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local opts = { buffer = event.buf }
 
+        keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
         keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         keymap.set({"n", "x"}, "g=", function()
