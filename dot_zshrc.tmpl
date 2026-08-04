@@ -58,7 +58,7 @@ alias vi='nvim'
 alias vim='nvim'
 alias vimrc='(cd "$(chezmoi source-path ~/.config/nvim)" && nvim init.lua && chezmoi -v apply ~/.config/nvim)'
 
-alias zshrc='chezmoi -v edit --apply ~/.zshrc && source ~/.zshrc'
+alias zshrc='chezmoi edit --hardlink=false ~/.zshrc && chezmoi -v apply ~/.zshrc && source ~/.zshrc'
 
 alias history='history 0'
 
@@ -78,7 +78,7 @@ alias tk='tmux kill-session'
 alias tks='tmux kill-server'
 alias tsyn='tmux set synchronize on'
 alias ten='tmux set synchronize off ; clear'
-alias tmuxrc='chezmoi -v edit --apply ~/.tmux.conf && tmux source-file ~/.tmux.conf'
+alias tmuxrc='chezmoi edit --hardlink=false ~/.tmux.conf && chezmoi -v apply ~/.tmux.conf && tmux source-file ~/.tmux.conf'
 
 tp () {
     local pane=${1:-3}
