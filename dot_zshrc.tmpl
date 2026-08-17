@@ -106,8 +106,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 ### compinit
 autoload -Uz compinit && compinit
 
-### direnv
-(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+### mise
+eval "$(mise activate zsh)"
 
 ## sheldon
 eval "$(sheldon source)"
