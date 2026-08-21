@@ -13,6 +13,8 @@ return require("lazy").setup({
     require("plugins.flash"),
     -- LSP
     require("plugins.lsp"),
+    -- Markdown
+    require("plugins.render-markdown"),
     -- Status line
     require("plugins.lualine"),
     -- Telescope
