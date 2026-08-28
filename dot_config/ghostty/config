@@ -6,3 +6,4 @@ font-size = 18
 shell-integration-features = no-title
 title = " "
 macos-titlebar-proxy-icon = hidden
+confirm-close-surface = false
