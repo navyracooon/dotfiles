@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# .chezmoidata.toml の agentSkills が変わったときに入れ直す。
+# CLI は major だけ固定し、telemetry は止める。更新は `DISABLE_TELEMETRY=1 npx skills@1 update -g` で行う。
+
+set -euo pipefail
+
+if ! command -v npx >/dev/null 2>&1; then
+    # 実行済みと記録させず、npx を入れた後の apply で入れる
+    printf 'npx is required to install agent skills\n' >&2
+    exit 1
+fi
+
+export DISABLE_TELEMETRY=1
+{{ range .agentSkills }}
+# 実体を ~/.agents/skills（Codex が読む）に置き、~/.claude/skills から symlink する。update -g と同じ配置になる。
+npx --yes skills@1 add {{ .source | quote }} --skill {{ .skill | quote }} --global --agent claude-code codex --yes
+{{- end }}

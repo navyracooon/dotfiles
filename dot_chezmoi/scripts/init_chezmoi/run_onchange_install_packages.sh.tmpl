@@ -14,8 +14,9 @@ common_packages=(
     zsh
 )
 gui_packages=(ghostty)
+macos_packages=(node)
 macos_gui_packages=(amethyst font-hackgen-nerd)
-arch_packages=(base-devel)
+arch_packages=(base-devel nodejs npm)
 
 {{- if eq .chezmoi.os "darwin" }}
 if ! command -v brew >/dev/null 2>&1; then
@@ -23,7 +24,7 @@ if ! command -v brew >/dev/null 2>&1; then
     exit 1
 fi
 
-brew install "${common_packages[@]}"
+brew install "${common_packages[@]}" "${macos_packages[@]}"
 
 {{- if eq .profile "gui" }}
 brew install --cask "${gui_packages[@]}" "${macos_gui_packages[@]}"

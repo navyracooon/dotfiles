@@ -1,0 +1,6 @@
+# npx skills で入れる外部のエージェント用スキル。版は固定せず、入れた時点の最新が入る。
+# 更新は `DISABLE_TELEMETRY=1 npx skills@1 update -g`。
+
+[[agentSkills]]
+source = "nanaism/yomiyasu"
+skill = "yomiyasu"

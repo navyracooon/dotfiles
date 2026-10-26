@@ -27,6 +27,11 @@ macOS と Arch Linux を主な対象にしています．
 ## Zsh Plugins
 Zsh プラグインは [Sheldon](https://sheldon.cli.rs/) で管理しています．プラグインを更新するときは `sheldon lock --update` を実行します．
 
+## Agent Skills
+Claude Code と Codex で使うスキルを [`skills/`](skills) に置いています．chezmoi は `~/.claude/skills/` と `~/.agents/skills/` に symlink を張るだけで，実体はこのリポジトリです．外部のスキル（文章の規範に使う [yomiyasu](https://github.com/nanaism/yomiyasu) など）は `.chezmoidata.toml` に一覧を置き，apply 時に [`npx skills`](https://github.com/vercel-labs/skills) で入れます（telemetry は `DISABLE_TELEMETRY=1` で止めています）．更新は `DISABLE_TELEMETRY=1 npx skills@1 update -g` です．
+
+単体でも `npx skills add navyracooon/dotfiles --skill <name>` で入れられますが，スキル同士は `../<name>/SKILL.md` で参照し合うので一式で入れることを勧めます．文章の規範は [`AGENTS.md`](dot_config/ai/AGENTS.md) の Writing 節にあり，スキルには含まれません．
+
 ## What's Inside
 - [Zsh](https://www.zsh.org/)
 - [tmux](https://github.com/tmux/tmux)
