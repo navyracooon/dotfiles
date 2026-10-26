@@ -17,6 +17,30 @@ skills/
 !.claude/skills/{{ base . }}
 !.agents/skills/{{ base . }}
 {{- end }}
+# マシン固有の設定、認証情報、履歴を add しない
+.gitconfig.local
+.*_history
+.lesshst
+.viminfo
+.zsh_sessions/
+.bash_sessions/
+.local/state/
+.Trash/
+.cache/
+.npm/
+.aws/
+.colima/
+.docker/
+.git-credentials
+.gnupg/
+.kube/
+.netrc
+.npmrc
+.pypirc
+.ssh/
+.config/chezmoi/
+.config/gcloud/
+.config/gh/
 
 {{- if ne .profile "gui" }}
 .config/ghostty/
