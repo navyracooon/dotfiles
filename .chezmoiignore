@@ -1,5 +1,21 @@
 README.md
 docs/
+skills/
+# ~/.claude、~/.agents、~/.codex は許可したものだけを管理する（セッション記録、認証情報、skills/ に無いスキルを add しない）
+.claude.json*
+.claude/*
+!.claude/CLAUDE.md
+!.claude/skills
+.claude/skills/*
+.agents/*
+!.agents/skills
+.agents/skills/*
+.codex/*
+!.codex/AGENTS.md
+{{- range glob (joinPath .chezmoi.sourceDir "skills/*") }}
+!.claude/skills/{{ base . }}
+!.agents/skills/{{ base . }}
+{{- end }}
 
 {{- if ne .profile "gui" }}
 .config/ghostty/
